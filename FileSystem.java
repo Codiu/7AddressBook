@@ -12,11 +12,8 @@ public class FileSystem {
         try {
             System.out.println("reading the file...");
 
-            FileInputStream fileInputStream = new FileInputStream("db.txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
+             ObjectInputStream objectInputStream = openFile();
               arr = (ArrayList<Contact>) objectInputStream.readObject();
-              // add contact to the end of Array
 
           }
         catch (Exception e) {
@@ -25,6 +22,7 @@ public class FileSystem {
         finally {
             System.out.println("continue...");
 
+            // add contact to the end of Array
             arr.add(contact);
             // save file
             FileOutputStream fileOutputStream = new FileOutputStream("db.txt");
@@ -35,16 +33,20 @@ public class FileSystem {
         }
     }
 
-
-    public static void openIt() throws IOException, ClassNotFoundException {
-
+    public static ObjectInputStream openFile() throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream("db.txt");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
-        Contact copyContacts = (Contact) objectInputStream.readObject();
-
-
-
-
+        return new ObjectInputStream(fileInputStream);
     }
+
+    public static ArrayList<Contact> readFile() throws IOException, ClassNotFoundException {
+
+        return (ArrayList<Contact>) openFile().readObject();
+    }
+
+
+
+
 }
+
+
+

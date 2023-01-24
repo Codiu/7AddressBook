@@ -3,12 +3,15 @@
   and extract from.
  */
 
+import java.io.ObjectInputStream;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.Serializable;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 
 public class AddressBook implements Serializable {
 
@@ -26,8 +29,10 @@ public class AddressBook implements Serializable {
 
 
     public static void showContacts() throws IOException, ClassNotFoundException {
-        FileSystem.openIt();
-
+        ArrayList<Contact> arr = FileSystem.readFile();
+        for (Contact i : arr) {
+            System.out.println("Name " + i.name + " Phone number: " + i.phone);
+        }
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -58,10 +63,10 @@ public class AddressBook implements Serializable {
 
 
 
-// increase fields
+        // increase fields
         // show list of items
-
         // remove items
+
         // where to put Scanner input object?
         // what is this "throws" IO stuff?
 
@@ -71,7 +76,7 @@ public class AddressBook implements Serializable {
             [DONE] method showing items
             [DONE] Make contacts as objects. how the hell we create new object every time we add account?
             [DONE] extend details, by storing object instead of String?
-            [DONE] implement Input inferface
+            [DONE] implement Input interface
         */
 
     }
