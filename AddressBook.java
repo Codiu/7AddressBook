@@ -1,24 +1,18 @@
 /* this app to practice HashMaps
 + storing data by Serialization
-  and extract from.
+  and extract from
  */
 
-import java.io.ObjectInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.io.Serializable;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 
 public class AddressBook implements Serializable {
 
 
-
-    public static void addContact() throws IOException, ClassNotFoundException {
+    public static void addContact() {
         Scanner in = new Scanner(System.in);
+
         System.out.println("Enter contact name: ");
         String name = in.nextLine();
         System.out.println("Enter phone number of " + name + " ");
@@ -27,50 +21,33 @@ public class AddressBook implements Serializable {
         FileSystem.saveIt(new Contact(name, phone));
     }
 
-
-    public static void showContacts() throws IOException, ClassNotFoundException {
+    public static void showContacts() {
         ArrayList<Contact> arr = FileSystem.readFile();
         for (Contact i : arr) {
             System.out.println("Name " + i.name + " Phone number: " + i.phone);
         }
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Addressbook. What you willing to do?");
-        System.out.println("1. List of all Contacts");
-        System.out.println("2. Add new Contact");
-        System.out.println("3. Remove Contacts");
-        int action = input.nextInt();
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
 
+        while(true) {
+            System.out.println("Addressbook. What you willing to do?");
+            System.out.println("1. List of all Contacts");
+            System.out.println("2. Add new Contact");
+            System.out.println("3. Exit");
+            int action = in.nextInt();
 
-
-
-
-        switch (action) {
-            case 1 -> showContacts();
-            case 2 -> addContact();
-//            case 3 -> removeContacts();
+            switch (action) {
+                case 1 -> showContacts();
+                case 2 -> addContact();
+                case 3 -> System.exit(1);
+            }
         }
 
-
-
-
-
-
-
-
-
-
-
-        // increase fields
-        // show list of items
-        // remove items
-
-        // where to put Scanner input object?
-        // what is this "throws" IO stuff?
-
         /*
+            [DONE] what is this "throws" IO stuff? Handling exceptions
+            [DONE] show list of items
             [DONE] create separate file system
             [DONE] [ISSUE] does not store multiple objects. How to do that? And how to access that? (Store ArrayList of objects)
             [DONE] method showing items
@@ -78,6 +55,5 @@ public class AddressBook implements Serializable {
             [DONE] extend details, by storing object instead of String?
             [DONE] implement Input interface
         */
-
     }
 }
